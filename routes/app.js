@@ -9,7 +9,6 @@ router.get('/', function (req, res, next) {
       }
       res.render('node', {email: doc});
     });
-    res.render('node');
 });
 
 router.post('/', function(req, res, next) {
