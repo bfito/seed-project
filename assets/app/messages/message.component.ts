@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 import { Message } from "./message.model";
 
@@ -11,7 +11,7 @@ import { Message } from "./message.model";
       font-style: italic;
       font-size: 12px;
       width: 80%;
-    }
+    }$event always stores the value
     .config {
       display: inline-block;
       text-align: right;
@@ -22,5 +22,10 @@ import { Message } from "./message.model";
 })
 export class MessageComponent {
   @Input() message: Message;
+  @Output() editClicked = new EventEmitter<string>();
 
+  onEdit() {
+    alert('it worked');
+    this.editClicked.emit('A new value');
+  }
 }
