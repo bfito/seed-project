@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
         width: 19%;
       }
     `]
-}),
+})
 export class AppComponent {
     message = {
       content: 'Some content',
