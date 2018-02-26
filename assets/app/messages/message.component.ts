@@ -25,7 +25,6 @@ export class MessageComponent {
   @Output() editClicked = new EventEmitter<string>();
 
   onEdit() {
-    alert('it worked');
     this.editClicked.emit('A new value');
   }
 }
