@@ -6,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { MessageComponent } from "./messages/message.component";
 import { MessageListComponent } from "./messages/message-list.component";
 import { MessageInputComponent } from "./messages/message-input.component";
+import { MessageService } from "./messages/message.service";
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { MessageInputComponent } from "./messages/message-input.component";
         MessageInputComponent
     ],
     imports: [BrowserModule, FormsModule],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [MessageService]
 })
 export class AppModule {
 

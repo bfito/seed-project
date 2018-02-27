@@ -7,5 +7,5 @@ import { Message } from "./messages/message.model";
     templateUrl: './app.component.html',
 })
 export class AppComponent {
-
+  
 }
