@@ -8,5 +8,4 @@ import { MessageService } from "./messages/message.service";
     providers: [MessageService]
 })
 export class AppComponent {
-
 }
