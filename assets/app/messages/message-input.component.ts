@@ -8,11 +8,11 @@ import { Message } from "./message.model";
     selector: 'app-message-input',
     templateUrl: './message-input.component.html'
 })
+
 export class MessageInputComponent implements OnInit {
     message: Message;
 
-export class MessageInputComponent {
-  constructor(private messageService: MessageService) {}
+    constructor(private messageService: MessageService) {}
 
   onSubmit(form: NgForm) {
     const message = new Message(form.value.content, 'JP');
