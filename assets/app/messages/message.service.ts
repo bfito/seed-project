@@ -13,7 +13,8 @@ export class MessageService {
 
   addMessage(message: Message) {
     this.messages.push(message);
-    console.log(this.messages);
+    const body = JSON.stringify(message);
+    this.http.post('http://localhost:3000/message', body);
   }
 
   getMessages() {
