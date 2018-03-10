@@ -14,7 +14,9 @@ export class MessageService {
   addMessage(message: Message) {
     this.messages.push(message);
     const body = JSON.stringify(message);
-    this.http.post('http://localhost:3000/message', body);
+    return this.http.post('http://localhost:3000/message', body)
+      .map((response: Response) => response.json())
+      .catch((error: Response) => Observable.throw(error.json()));
   }
 
   getMessages() {

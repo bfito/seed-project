@@ -9,14 +9,16 @@ import { Message } from "./message.model";
     templateUrl: './message-input.component.html'
 })
 
-export class MessageInputComponent implements OnInit {
-    message: Message;
-
+export class MessageInputComponent {
     constructor(private messageService: MessageService) {}
 
   onSubmit(form: NgForm) {
     const message = new Message(form.value.content, 'JP');
-    this.messageService.addMessage(message);
+    this.messageService.addMessage(message)
+      .subscribe(
+          data => console.log(data),
+          error => console.error(error)
+      );
     form.resetForm();
   }
 }
