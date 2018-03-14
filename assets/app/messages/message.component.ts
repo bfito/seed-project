@@ -27,7 +27,7 @@ export class MessageComponent {
   constructor(private messageService: MessageService) {}
 
   onEdit() {
-    this.editClicked.emit('A new value');
+    this.messageService.editMessage(this.message);
   }
 
   onDelete() {
