@@ -22,7 +22,7 @@ export class MessageListComponent implements OnInit {
       this.messageService.getMessages()
         .subscribe(
           (messages: Message[]) => {
-            this.messages = messages
+            this.messages = messages;
           }
         );
   }
