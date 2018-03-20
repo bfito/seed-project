@@ -10,10 +10,25 @@ var appRoutes = require('./routes/app');
 var messageRoutes = require('./routes/messages');
 var userRoutes = require('./routes/user');
 
-
 var app = express();
-//mongoose.connect('mongodb://localhost:27017/node-angular');
-mongoose.connect('localhost:27017/node-angular');
+// mongoose.connect('mongodb://localhost:27017/node-angular');
+// mongoose.connect('localhost:27017/node-angular');
+// Using `mongoose.connect`...
+
+// var promise = mongoose.connect('mongodb://localhost:27017/node-angular', {
+//   useMongoClient: true,
+//   /* other options */
+// });
+// // Or `createConnection`
+var promise = mongoose.createConnection('mongodb://localhost:27017/node-angular', {
+  useMongoClient: true,
+  /* other options */
+});
+promise.then(function(db) {
+  /* Use `db`, for instance `db.model()`
+});
+// Or, if you already have a connection
+connection.openUri('mongodb://localhost/myapp', { /* options */ });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
