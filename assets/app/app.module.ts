@@ -35,7 +35,7 @@ import { AuthService } from "./auth/auth.service";
         routing,
         ReactiveFormsModule,
         HttpModule
-      ],
+    ],
     providers: [AuthService],
     bootstrap: [AppComponent]
 })

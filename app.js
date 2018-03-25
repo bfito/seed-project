@@ -11,7 +11,6 @@ var messageRoutes = require('./routes/messages');
 var userRoutes = require('./routes/user');
 
 var app = express();
-//mongoose.connect('mongodb://localhost:27017/node-angular');
 mongoose.connect('localhost:27017/node-angular');
 
 // view engine setup
@@ -33,7 +32,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-// the order here is important, I want to route messages first
 app.use('/message', messageRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);

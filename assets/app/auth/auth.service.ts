@@ -26,10 +26,10 @@ export class AuthService {
     }
 
     logout() {
-      localStorage.clear();
+        localStorage.clear();
     }
 
     isLoggedIn() {
-      return localStorage.getItem('token') !== null;
+        return localStorage.getItem('token') !== null;
     }
 }

@@ -6,31 +6,32 @@ var User = require('../models/user');
 var Message = require('../models/message');
 
 router.get('/', function (req, res, next) {
-  Message.find()
-    .exec(function(err, messages) {
-      if (err) {
-        return res.status(500).json({
-          title: 'An error occured',
-          error: err
+    Message.find()
+        .populate('user', 'firstName')
+        .exec(function (err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: messages
+            });
         });
-      }
-      res.status(200).json({
-        message: 'Success',
-        obj: messages
-      });
-    });
 });
 
-router.use('/', function(req, res, next) {
-  jwt.verify(req.query.token, 'secret', function(err, decoded) {
-    if (err) {
-      return res.status(401).json({
-        title: 'Not Authenticated',
-        error: err
-      });
-    }
-    next();
-  });
+router.use('/', function (req, res, next) {
+    jwt.verify(req.query.token, 'secret', function (err, decoded) {
+        if (err) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: err
+            });
+        }
+        next();
+    });
 });
 
 router.post('/', function (req, res, next) {
@@ -44,7 +45,7 @@ router.post('/', function (req, res, next) {
     }
     var message = new Message({
       content: req.body.content,
-      user: user
+      user: user._id
     });
     message.save(function(err, result) {
       if (err) {
@@ -53,7 +54,7 @@ router.post('/', function (req, res, next) {
           error: err
         });
       }
-      user.message.push(result);
+      user.messages.push(result);
       user.save();
       res.status(201).json({
         message: 'Saved',
