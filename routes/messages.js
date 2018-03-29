@@ -31,44 +31,45 @@ router.use('/', function (req, res, next) {
             });
         }
         next();
-    });
+    })
 });
 
 router.post('/', function (req, res, next) {
-  var decoded = jwt.decode(req.query.token);
-  User.findById(decoded.user._id, function(err, user){
-    if (err) {
-      return res.status(500).json({
-        title: 'An error occured',
-        error: err
-      });
-    }
-    var message = new Message({
-      content: req.body.content,
-      user: user._id
-    });
-    message.save(function(err, result) {
-      if (err) {
-        return res.status(500).json({
-          title: 'An error occured',
-          error: err
+    var decoded = jwt.decode(req.query.token);
+    User.findById(decoded.user._id, function (err, user) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        var message = new Message({
+            content: req.body.content,
+            user: user._id
         });
-      }
-      user.messages.push(result);
-      user.save();
-      res.status(201).json({
-        message: 'Saved',
-        obj: result
-      });
+        message.save(function (err, result) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            user.messages.push(result);
+            user.save();
+            res.status(201).json({
+                message: 'Saved message',
+                obj: result
+            });
+        });
     });
-  });
 });
 
-router.patch('/:id', function(req, res, next) {
-  Message.findById(req.params.id, function(err, message){
-    if (err) {
+router.patch('/:id', function (req, res, next) {
+    var decoded = jwt.decode(req.query.token);
+    Message.findById(req.params.id, function (err, message) {
+      if (err) {
       return res.status(500).json({
-        title: 'An error occured',
+          title: 'An error occurred',
         error: err
       });
     }
@@ -94,8 +95,9 @@ router.patch('/:id', function(req, res, next) {
   });
 });
 
-router.delete('/:id', function(req,res,next) {
-  Message.findById(req.params.id, function(err, message){
+router.delete('/:id', function(req, res, next) {
+    var decoded = jwt.decode(req.query.token);
+    Message.findById(req.params.id, function (err, message) {
     if (err) {
       return res.status(500).json({
         title: 'An error occured',
